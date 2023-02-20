@@ -20,5 +20,7 @@ List<MeetingRoom> findByEmployeeNoOrderByMeetingRoomNoDesc(@Param(value = "emplo
 
 
     List<MeetingRoom> findByReserveDateOrderByRoomNameAscStartTimeAsc(String date);
-    List<MeetingRoom> findByEmployeeNoAndReserveDateContaining(String employeeNo, String formatedNow);
+//    List<MeetingRoom> findByEmployeeNoAndReserveDateContaining(String employeeNo, String formatedNow);
+
+    List<MeetingRoom> findByReserveDateContaining(String formatedNow); // 오늘 예약된 회의실
 }
