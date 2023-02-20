@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,7 +72,16 @@ public class MeetingRoomService {
 
     public List<MeetingRoom> getTodayReservation(String employeeNo, String formatedNow) {
         formatedNow = formatedNow.substring(0, 2) + "-" + formatedNow.substring(3);
-        return meetingRoomRepository.findByEmployeeNoAndReserveDateContaining(employeeNo,formatedNow);
+        List<MeetingRoom> todayReservationList = meetingRoomRepository.findByReserveDateContaining(formatedNow);
+        List<MeetingRoom> myTodayReservationList = new ArrayList<>();
+        for (MeetingRoom m : todayReservationList) {
+            if(m.getEmployeeNo().equals(employeeNo)) myTodayReservationList.add(m); // 내가 예약했을 경우
+            List<String> attendList = m.getAttendee();
+            for (String s : attendList) {
+                if(s.equals(employeeNo)) myTodayReservationList.add(m);
+            }
+        }
+        return myTodayReservationList;
     }
 
 }
