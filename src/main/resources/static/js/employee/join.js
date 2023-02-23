@@ -180,6 +180,7 @@ window.addEventListener('DOMContentLoaded', function (){
             email.classList.remove('border_success','ok_icon');
             email_blank.className = '';
             duplicateEmailMsg.className = 'd-none';
+            notEmailForm.classList = 'd-none';
         } else{
             const substring = '@';
             if (emailValue.indexOf(substring) === -1) {
@@ -208,6 +209,8 @@ window.addEventListener('DOMContentLoaded', function (){
             email.classList.add('border_danger','error_icon');
             email.classList.remove('border_success','ok_icon');
             duplicateEmailMsg.className = '';
+            email_blank.className = 'd-none';
+            notEmailForm.className = 'd-none';
         }else{
             email.classList.add('border_success','ok_icon');
             email.classList.remove('border_danger','error_icon');
