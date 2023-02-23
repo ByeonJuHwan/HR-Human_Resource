@@ -25,6 +25,7 @@
     position: relative;
     height: 51px;
     border: solid 1px #dadada;
+    border-radius: 4px;
     padding: 10px 110px 10px 14px;
     vertical-align: top;
 }
@@ -102,6 +103,7 @@ label{
     position: relative;
     height: 51px;
     border: solid 1px #dadada;
+    border-radius: 4px;
     padding: 10px 110px 10px 14px;
     vertical-align: top;
 }
