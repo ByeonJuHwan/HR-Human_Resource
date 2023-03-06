@@ -1,13 +1,16 @@
 package com.sohwakmo.hr.domain;
 
+import javax.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @DynamicInsert
@@ -15,9 +18,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
 @ToString(exclude = {"attendances"})
 @Table(uniqueConstraints = {@UniqueConstraint(name = "PHONE_EMAIL_UNIQUE", columnNames = {"PHONE","EMAIL"})})
 @SequenceGenerator(name = "EMPLOYEES_SEQ_GEN",sequenceName = "EMPLOYEE_SEQ", allocationSize = 1)
@@ -57,7 +58,6 @@ public class Employee implements Serializable {
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @Builder.Default
-    @ToString.Exclude
     private List<Attendance> attendances = new ArrayList<Attendance>(); // 사원번호로 출격 관리 리스트 불러오기
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -85,16 +85,4 @@ public class Employee implements Serializable {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Employee employee = (Employee) o;
-        return getId() != null && Objects.equals(getId(), employee.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

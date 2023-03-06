@@ -341,7 +341,7 @@ public class EmployeeService {
         String resultMinutes;
         if (startTimeMinutes > nowTimeMinutes) {
             resultMinutes = String.valueOf(60 - startTimeMinutes + nowTimeMinutes);
-            if(nowTimeHour==startWorkHour) resultHour="0";
+            if(nowTimeHour.equals(startWorkHour)) resultHour="0";
             else if (nowTimeHour-startWorkHour==1) resultHour = "0";
             else resultHour = String.valueOf(nowTimeHour - startWorkHour - 1);
         }else{
