@@ -196,7 +196,10 @@ public class EmployeeService {
      *
      */
     public String getExpectEndTime(Integer hours, Integer minutes) {
-        String endHours = String.valueOf(hours + 9);
+        String endHours = "";
+        if (hours >= 15) endHours = String.valueOf(hours - 15);
+        else endHours = String.valueOf(hours + 9);
+
         String endMinutes = String.valueOf(minutes);
         if (endMinutes.length() == 1) {
             endMinutes = "0" + String.valueOf(minutes);
@@ -341,7 +344,7 @@ public class EmployeeService {
         String resultMinutes;
         if (startTimeMinutes > nowTimeMinutes) {
             resultMinutes = String.valueOf(60 - startTimeMinutes + nowTimeMinutes);
-            if(nowTimeHour.equals(startWorkHour)) resultHour="0";
+            if(nowTimeHour==startWorkHour) resultHour="0";
             else if (nowTimeHour-startWorkHour==1) resultHour = "0";
             else resultHour = String.valueOf(nowTimeHour - startWorkHour - 1);
         }else{
